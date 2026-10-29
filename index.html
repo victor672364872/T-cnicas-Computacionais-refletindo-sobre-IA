@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas Computacionais: IA na Escola</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#050814',
+                            card: 'rgba(15, 23, 42, 0.75)',
+                            cyan: '#00f3ff',
+                            purple: '#bc13fe',
+                            pink: '#ff007f',
+                            green: '#00ff66'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-cyber-bg text-gray-100 font-rajdhani overflow-x-hidden relative min-h-screen">
+
+    <!-- Canvas para Partículas do Fundo -->
+    <canvas id="particles-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Overlay de Varredura / Grid Futurista -->
+    <div class="scanline pointer-events-none fixed inset-0 z-10 opacity-30"></div>
+    <div class="cyber-grid pointer-events-none fixed inset-0 z-0 opacity-20"></div>
+
+    <!-- Navegação Superior -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-opacity-70 bg-[#050814] border-b border-cyber-cyan/30 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-brain text-cyber-cyan text-2xl animate-pulse"></i>
+                <span class="font-orbitron font-bold text-lg md:text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink">
+                    IA.EDU // FUTURO
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-orbitron text-sm">
+                <a href="#inicio" class="hover:text-cyber-cyan transition-colors">// INÍCIO</a>
+                <a href="#pilares" class="hover:text-cyber-purple transition-colors">// PILARES</a>
+                <a href="#simulador" class="hover:text-cyber-pink transition-colors">// SIMULADOR</a>
+                <a href="#mural" class="hover:text-cyber-green transition-colors">// MURAL</a>
+            </div>
+            <a href="#simulador" class="cyber-button px-4 py-2 font-orbitron text-xs rounded border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all duration-300">
+                DIAGNOSTICAR
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative z-20 max-w-7xl mx-auto px-6 pt-20 pb-16 flex flex-col items-center text-center">
+        <div class="inline-block mb-4 px-4 py-1 rounded-full border border-cyber-cyan/50 bg-cyber-cyan/10 text-cyber-cyan font-orbitron text-xs tracking-widest uppercase">
+            Transformação Digital na Educação
+        </div>
+        <h1 class="font-orbitron text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mb-6">
+            TÉCNICAS COMPUTACIONAIS <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink">
+                REFLETINDO SOBRE A IA NA ESCOLA
+            </span>
+        </h1>
+        <p class="text-gray-300 text-lg md:text-xl max-w-2xl font-medium mb-10 leading-relaxed">
+            Como a Inteligência Artificial redefiniu o ecossistema educacional? Explore reflexões éticas, desafios pedagógicos e as oportunidades de uma aprendizagem verdadeiramente aumentada.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="#pilares" class="px-8 py-3 rounded bg-gradient-to-r from-cyber-cyan to-blue-600 text-black font-orbitron font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.6)] transition-all duration-300">
+                EXPLORAR PILARES
+            </a>
+            <a href="#simulador" class="px-8 py-3 rounded border border-cyber-purple text-cyber-purple font-orbitron font-bold hover:bg-cyber-purple hover:text-white hover:shadow-[0_0_20px_rgba(188,19,254,0.6)] transition-all duration-300">
+                TESTAR CONHECIMENTO
+            </a>
+        </div>
+    </section>
+
+    <!-- Pilares de Reflexão (Cartões em Glassmorphism) -->
+    <section id="pilares" class="relative z-20 max-w-7xl mx-auto px-6 py-16">
+        <h2 class="font-orbitron text-2xl md:text-4xl font-bold text-center mb-12 tracking-wide">
+            <span class="text-cyber-cyan">//</span> EJES DE REFLEXÃO
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="glass-card p-6 rounded-xl border border-cyber-cyan/20 hover:border-cyber-cyan transition-all duration-300 cursor-pointer group" onclick="openModal('etica')">
+                <div class="w-12 h-12 rounded-lg bg-cyber-cyan/10 flex items-center justify-center text-cyber-cyan text-2xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold mb-2 group-hover:text-cyber-cyan transition-colors">Ética & Transparência</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Integridade acadêmica, viés de dados e o uso consciente de algoritmos em sala de aula.</p>
+                <span class="text-cyber-cyan font-orbitron text-xs flex items-center gap-2">SAIBA MAIS <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass-card p-6 rounded-xl border border-cyber-purple/20 hover:border-cyber-purple transition-all duration-300 cursor-pointer group" onclick="openModal('personalizacao')">
+                <div class="w-12 h-12 rounded-lg bg-cyber-purple/10 flex items-center justify-center text-cyber-purple text-2xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold mb-2 group-hover:text-cyber-purple transition-colors">Ensino Personalizado</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Adaptabilidade de ritmos, mentores virtuais 24/7 e suporte individualizado aos estudantes.</p>
+                <span class="text-cyber-purple font-orbitron text-xs flex items-center gap-2">SAIBA MAIS <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="glass-card p-6 rounded-xl border border-cyber-pink/20 hover:border-cyber-pink transition-all duration-300 cursor-pointer group" onclick="openModal('automa')">
+                <div class="w-12 h-12 rounded-lg bg-cyber-pink/10 flex items-center justify-center text-cyber-pink text-2xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold mb-2 group-hover:text-cyber-pink transition-colors">O Papel do Docente</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">A transição da mera transmissão de conteúdo para a mediação do pensamento crítico.</p>
+                <span class="text-cyber-pink font-orbitron text-xs flex items-center gap-2">SAIBA MAIS <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="glass-card p-6 rounded-xl border border-cyber-green/20 hover:border-cyber-green transition-all duration-300 cursor-pointer group" onclick="openModal('inclusao')">
+                <div class="w-12 h-12 rounded-lg bg-cyber-green/10 flex items-center justify-center text-cyber-green text-2xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold mb-2 group-hover:text-cyber-green transition-colors">Inclusão Digital</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Garantir acesso equitativo às tecnologias emergentes para evitar novas divisões sociais.</p>
+                <span class="text-cyber-green font-orbitron text-xs flex items-center gap-2">SAIBA MAIS <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulador & Quiz Interativo -->
+    <section id="simulador" class="relative z-20 max-w-5xl mx-auto px-6 py-16">
+        <div class="glass-card p-8 md:p-12 rounded-2xl border border-cyber-cyan/30">
+            <h2 class="font-orbitron text-2xl md:text-3xl font-bold mb-6 text-center text-cyber-cyan">
+                SIMULADOR DE IMPACTO PEDAGÓGICO
+            </h2>
+            <p class="text-center text-gray-300 mb-8 max-w-xl mx-auto">
+                Responda às questões abaixo para gerar um diagnóstico cibernético sobre a maturidade do uso de IA no seu ambiente educacional.
+            </p>
+
+            <form id="quiz-form" class="space-y-6">
+                <!-- Pergunta 1 -->
+                <div>
+                    <label class="block font-orbitron text-sm font-semibold mb-3 text-cyber-purple">
+                        1. Como a sua escola encara o uso de ferramentas de IA gerativa (como ChatGPT)?
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 p-3 rounded bg-slate-900/50 hover:bg-slate-800 border border-slate-700 cursor-pointer">
+                            <input type="radio" name="q1" value="proibir" class="accent-cyber-cyan" required>
+                            <span>Proíbe o uso por receio de plágio e perda de raciocínio.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded bg-slate-900/50 hover:bg-slate-800 border border-slate-700 cursor-pointer">
+                            <input type="radio" name="q1" value="ignorar" class="accent-cyber-cyan">
+                            <span>Ignora e não possui diretrizes claras sobre o assunto.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded bg-slate-900/50 hover:bg-slate-800 border border-slate-700 cursor-pointer">
+                            <input type="radio" name="q1" value="integrar" class="accent-cyber-cyan">
+                            <span>Incentiva o uso ético focado na análise crítica e pesquisa.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pergunta 2 -->
+                <div>
+                    <label class="block font-orbitron text-sm font-semibold mb-3 text-cyber-purple">
+                        2. Qual a prioridade ao ensinar técnicas computacionais no currículo?
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 p-3 rounded bg-slate-900/50 hover:bg-slate-800 border border-slate-700 cursor-pointer">
+                            <input type="radio" name="q2" value="sintaxe" class="accent-cyber-cyan" required>
+                            <span>Apenas sintaxe de código e ferramentas operacionais.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded bg-slate-900/50 hover:bg-slate-800 border border-slate-700 cursor-pointer">
+                            <input type="radio" name="q2" value="critico" class="accent-cyber-cyan">
+                            <span>Pensamento computacional, resolução de problemas e ética digital.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink font-orbitron font-bold text-black rounded hover:opacity-90 transition-opacity">
+                    GERAR DIAGNÓSTICO CIBERNÉTICO
+                </button>
+            </form>
+
+            <!-- Área de Resultado do Quiz -->
+            <div id="quiz-result" class="hidden mt-10 pt-8 border-t border-slate-700 text-center">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-cyber-green">RESULTADO DA ANÁLISE</h3>
+                <div class="max-w-xs mx-auto mb-6">
+                    <canvas id="resultChart"></canvas>
+                </div>
+                <p id="diagnosis-text" class="text-gray-200 font-medium text-lg leading-relaxed max-w-xl mx-auto"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mural Colaborativo de Ideias -->
+    <section id="mural" class="relative z-20 max-w-7xl mx-auto px-6 py-16">
+        <h2 class="font-orbitron text-2xl md:text-4xl font-bold text-center mb-4 tracking-wide">
+            <span class="text-cyber-pink">//</span> MURAL DE REFLEXÕES DA COMUNIDADE
+        </h2>
+        <p class="text-center text-gray-400 mb-10">Deixe sua ideia sobre o futuro da inteligência artificial na educação.</p>
+
+        <!-- Formulário de Ideia -->
+        <form id="mural-form" class="max-w-2xl mx-auto glass-card p-6 rounded-xl border border-cyber-pink/30 mb-12 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="author" placeholder="Seu Nome / Função (ex: Prof. Lucas)" required
+                    class="bg-slate-900/80 border border-slate-700 rounded px-4 py-2 font-sans focus:outline-none focus:border-cyber-pink text-white">
+                <select id="tag" class="bg-slate-900/80 border border-slate-700 rounded px-4 py-2 font-sans focus:outline-none focus:border-cyber-pink text-white">
+                    <option value="Ética">Ética & Sociedade</option>
+                    <option value="Metodologia">Novas Metodologias</option>
+                    <option value="Ferramentas">Ferramentas de IA</option>
+                </select>
+            </div>
+            <textarea id="idea" rows="3" placeholder="Sua reflexão sobre IA na escola..." required
+                class="w-full bg-slate-900/80 border border-slate-700 rounded p-4 font-sans focus:outline-none focus:border-cyber-pink text-white"></textarea>
+            <button type="submit" class="w-full py-3 bg-cyber-pink font-orbitron font-bold text-black rounded hover:bg-pink-400 transition-colors">
+                PUBLICAR REFLEXÃO
+            </button>
+        </form>
+
+        <!-- Grade de Reflexões -->
+        <div id="mural-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- As postagens serão geradas dinamicamente aqui -->
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="relative z-20 border-t border-cyber-cyan/20 bg-[#02040a] py-8 text-center text-gray-500 font-orbitron text-xs">
+        <p>© 2026 PROJETO TÉCNICAS COMPUTACIONAIS // IA NA ESCOLA</p>
+        <p class="mt-2 text-gray-600">Desenvolvido com estética Cyberpunk & Design Interativo</p>
+    </footer>
+
+    <!-- Modal Genérico para Detalhes -->
+    <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="glass-card max-w-lg w-full p-6 rounded-xl border border-cyber-cyan relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+            <h3 id="modal-title" class="font-orbitron text-2xl font-bold text-cyber-cyan mb-4"></h3>
+            <p id="modal-content" class="text-gray-300 leading-relaxed font-sans text-base"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript Customizado -->
+    <script src="script.js"></script>
+</body>
+</html>
